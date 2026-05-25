@@ -1,0 +1,180 @@
+{
+  "pages": {
+    "default": {
+      "theme": {
+        "bgColor": "#030712",
+        "accent": "#6366f1",
+        "accentCyan": "#06b6d4"
+      },
+      "video": {
+        "src": "mp_.mp4",
+        "startTime": 1,
+        "endTime": 23,
+        "smoothing": 0.02
+      },
+      "loader": {
+        "title": "Behrang",
+        "status": "Virtual Studio"
+      },
+      "navigation": {
+        "logo": "Behrang.XYZ",
+        "links": [],
+        "actionText": "GO TO NOTE",
+        "actionUrl": "http://localhost:8080/?page=note"
+      },
+      "socialLinks": [
+        {
+          "platform": "instagram",
+          "url": "https://instagram.com/aether"
+        },
+        {
+          "platform": "twitter",
+          "url": "https://x.com/aether"
+        },
+        {
+          "platform": "youtube",
+          "url": "https://youtube.com/aether"
+        }
+      ],
+      "sections": [
+        {
+          "id": "intro",
+          "tag": "01 / INTRODUCTION",
+          "title": "Experience the<br><span class=\"gradient-text\">Future of Fluidity</span>",
+          "lead": "Welcome to Aether. Scroll down to initiate the sequence and witness dynamic timeline morphing in real time.",
+          "alignment": "left",
+          "buttons": []
+        },
+        {
+          "id": "tech",
+          "tag": "02 / CORE TECHNOLOGY",
+          "title": "Timeline<br>Interpolation",
+          "lead": "Our engine maps scroll mechanics to video frames with precise mathematical easing. Experience backward and forward time travel with absolute fidelity.",
+          "alignment": "right",
+          "buttons": [],
+          "metricValue": "10ms",
+          "metricLabel": "Latency Response"
+        },
+        {
+          "id": "vision",
+          "tag": "03 / VISION",
+          "title": "A Seamless<br>Synthesis",
+          "lead": "Blurring the lines between cinematography and interaction. Watch the environment morph and react directly to your pace of discovery.",
+          "alignment": "left",
+          "buttons": [],
+          "bullets": [
+            "Keyframe Precision (1s to 27s Window)",
+            "Bidirectional Frame Render Easing"
+          ]
+        },
+        {
+          "id": "cta",
+          "tag": "04 / NEXT STEPS",
+          "title": "Begin Your Journey",
+          "lead": "Join a select group of pioneers reshaping web experiences. Create your credentials now.",
+          "alignment": "center",
+          "buttons": [
+            {
+              "text": "Join Us",
+              "style": "primary",
+              "url": "https://example.com/join"
+            },
+            {
+              "text": "NEW Collection",
+              "style": "tertiary",
+              "url": "https://example.com/collection"
+            }
+          ]
+        }
+      ]
+    },
+    "note": {
+      "theme": {
+        "bgColor": "#030712",
+        "accent": "#daf264",
+        "accentCyan": "#d50775"
+      },
+      "video": {
+        "src": "video_note.mp4",
+        "startTime": 1,
+        "endTime": 23,
+        "smoothing": 0.02
+      },
+      "loader": {
+        "title": "NOTE",
+        "status": "Preloading Cinematic Assets..."
+      },
+      "navigation": {
+        "logo": "NOTE",
+        "links": [],
+        "actionText": "GO  Back",
+        "actionUrl": "http://localhost:8080/"
+      },
+      "socialLinks": [
+        {
+          "platform": "instagram",
+          "url": "https://instagram.com/aether"
+        },
+        {
+          "platform": "twitter",
+          "url": "https://x.com/aether"
+        },
+        {
+          "platform": "youtube",
+          "url": "https://youtube.com/aether"
+        }
+      ],
+      "sections": [
+        {
+          "id": "sec-note-1779739367719-0",
+          "tag": "01 / INTRODUCTION",
+          "title": "Experience the<br><span class=\"gradient-text\">Future of Fluidity</span>",
+          "lead": "Welcome to Aether. Scroll down to initiate the sequence and witness dynamic timeline morphing in real time.",
+          "alignment": "left",
+          "buttons": []
+        },
+        {
+          "id": "sec-note-1779739367719-1",
+          "tag": "02 / CORE TECHNOLOGY",
+          "title": "Timeline<br>Interpolation",
+          "lead": "Our engine maps scroll mechanics to video frames with precise mathematical easing. Experience backward and forward time travel with absolute fidelity.",
+          "alignment": "right",
+          "buttons": [],
+          "metricValue": "10ms",
+          "metricLabel": "Latency Response"
+        },
+        {
+          "id": "sec-note-1779739367719-2",
+          "tag": "03 / VISION",
+          "title": "A Seamless<br>Synthesis",
+          "lead": "Blurring the lines between cinematography and interaction. Watch the environment morph and react directly to your pace of discovery.",
+          "alignment": "left",
+          "buttons": [],
+          "bullets": [
+            "Keyframe Precision (1s to 27s Window)",
+            "Bidirectional Frame Render Easing"
+          ]
+        },
+        {
+          "id": "sec-note-1779739367719-3",
+          "tag": "04 / NEXT STEPS",
+          "title": "Begin Your Journey",
+          "lead": "Join a select group of pioneers reshaping web experiences. Create your credentials now.",
+          "alignment": "center",
+          "buttons": [
+            {
+              "text": "Join Us",
+              "style": "primary",
+              "url": "https://example.com/join"
+            },
+            {
+              "text": "NEW Collection",
+              "style": "tertiary",
+              "url": "https://example.com/collection"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

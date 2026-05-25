@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AETHER // Admin Dashboard</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="logo">AETHER</h1>
+                <span class="badge">CORE ADMIN v2.0</span>
+            </div>
+            
+            <nav class="sidebar-menu">
+                <button class="menu-btn active" data-tab="general">
+                    <span class="icon">&#9881;</span> Settings & Theme
+                </button>
+                <button class="menu-btn" data-tab="sections">
+                    <span class="icon">&#9638;</span> Page Sections
+                </button>
+                <button class="menu-btn" data-tab="social">
+                    <span class="icon">&#10041;</span> Social Links
+                </button>
+                <button class="menu-btn" data-tab="upload">
+                    <span class="icon">&#8682;</span> Video Management
+                </button>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button id="btn-save-all" class="btn btn-save">Save Settings</button>
+                <a href="/" target="_blank" class="view-site-link">View Landing Page &rarr;</a>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Toast Notification -->
+            <div id="toast" class="toast">Settings Saved Successfully!</div>
+
+            <!-- Campaign Selector Bar -->
+            <div class="campaign-selector-bar">
+                <div class="selector-group">
+                    <label for="campaign-select">Active Campaign Editor:</label>
+                    <select id="campaign-select">
+                        <option value="default">Default Campaign</option>
+                    </select>
+                </div>
+                <div class="creator-group">
+                    <input type="text" id="new-campaign-id" placeholder="new-campaign-id (e.g. cyber)">
+                    <button id="btn-create-campaign" class="btn-create-campaign">Create Campaign</button>
+                </div>
+                <button id="btn-delete-campaign" class="btn-delete-campaign-global">Delete Active Campaign</button>
+            </div>
+
+            <!-- Campaign Link Display -->
+            <div id="campaign-link-container" class="campaign-link-bar">
+                <span class="link-label">Campaign Link:</span>
+                <input type="text" id="campaign-link-url" readonly value="" style="margin-bottom: 0;">
+                <button id="btn-copy-campaign-link" class="btn-copy-link" title="Copy Campaign Link">📋 Copy Link</button>
+            </div>
+
+            <!-- Tab 1: General Settings & Theme -->
+            <section id="tab-general" class="tab-panel active">
+                <div class="panel-header">
+                    <h2>Settings & Theme Customization</h2>
+                    <p>Adjust visual parameters, performance controls, and theme colors.</p>
+                </div>
+
+                <div class="grid-2-col">
+                    <!-- Theme Settings Card -->
+                    <div class="glass-card">
+                        <h3 class="card-title">Theme Palette</h3>
+                        <div class="form-group">
+                            <label for="color-bg">Background Color</label>
+                            <div class="color-picker-wrapper">
+                                <input type="color" id="color-bg" value="#030712">
+                                <input type="text" id="color-bg-hex" class="hex-text" value="#030712">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="color-accent">Accent Color (Indigo)</label>
+                            <div class="color-picker-wrapper">
+                                <input type="color" id="color-accent" value="#6366f1">
+                                <input type="text" id="color-accent-hex" class="hex-text" value="#6366f1">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="color-accent-cyan">Secondary Accent Color (Cyan)</label>
+                            <div class="color-picker-wrapper">
+                                <input type="color" id="color-accent-cyan" value="#06b6d4">
+                                <input type="text" id="color-accent-cyan-hex" class="hex-text" value="#06b6d4">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Video Controls Card -->
+                    <div class="glass-card">
+                        <h3 class="card-title">Timeline Performance Parameters</h3>
+                        <div class="form-group">
+                            <label for="video-start">Start Frame Position (seconds)</label>
+                            <input type="number" id="video-start" step="0.1" min="0" value="1.0">
+                        </div>
+                        <div class="form-group">
+                            <label for="video-end">End Frame Position (seconds)</label>
+                            <input type="number" id="video-end" step="0.1" min="1" value="27.0">
+                        </div>
+                        <div class="form-group">
+                            <label for="video-smoothing">Scroll Smoothing Factor</label>
+                            <div class="slider-wrapper">
+                                <input type="range" id="video-smoothing" min="0.01" max="0.30" step="0.01" value="0.08">
+                                <span id="smoothing-val" class="slider-badge">0.08</span>
+                            </div>
+                            <small class="helper-text">Lower values = smoother, slow-motion scroll easing. Higher values = faster scroll tracking.</small>
+                        </div>
+                    </div>
+
+                    <!-- Loader & Global Text Settings Card -->
+                    <div class="glass-card">
+                        <h3 class="card-title">Loader Screen Configuration</h3>
+                        <div class="form-group">
+                            <label for="loader-title">Preloader Title</label>
+                            <input type="text" id="loader-title" value="A E T H E R">
+                        </div>
+                        <div class="form-group">
+                            <label for="loader-status">Preloader Status Copy</label>
+                            <input type="text" id="loader-status" value="Preloading Cinematic Assets...">
+                        </div>
+                    </div>
+
+                    <!-- Navbar Settings Card -->
+                    <div class="glass-card">
+                        <h3 class="card-title">Header Navigation</h3>
+                        <div class="form-group">
+                            <label for="nav-logo">Logo Title</label>
+                            <input type="text" id="nav-logo" value="AETHER">
+                        </div>
+                        <div class="form-group">
+                            <label for="nav-action">Header CTA Button Text</label>
+                            <input type="text" id="nav-action" value="Launch App">
+                        </div>
+                        <div class="form-group">
+                            <label for="nav-action-url">Header CTA Link URL</label>
+                            <input type="text" id="nav-action-url" value="https://example.com/shop">
+                        </div>
+                    </div>
+
+
+                </div>
+            </section>
+
+            <!-- Tab 2: Page Sections Content -->
+            <section id="tab-sections" class="tab-panel">
+                <div class="panel-header">
+                    <h2>Page Sections Content Editor</h2>
+                    <p>Customize copy, descriptions, metrics, and text alignments of the overlay panels. You can add or delete sections.</p>
+                </div>
+
+                <!-- Add Section Button -->
+                <button id="btn-add-section" class="btn btn-add-section">
+                    <span>+</span> Add New Section
+                </button>
+
+                <!-- Dynamic Sections Container -->
+                <div id="sections-editor-container">
+                    <!-- Rendered dynamically via JavaScript -->
+                </div>
+            </section>
+
+            <!-- Tab 3: Social Links -->
+            <section id="tab-social" class="tab-panel">
+                <div class="panel-header">
+                    <h2>Social Media Links</h2>
+                    <p>Manage the social media icons in the footer. You can add, edit, or remove links.</p>
+                </div>
+
+                <div class="glass-card">
+                    <h3 class="card-title">Manage Footer Links</h3>
+                    
+                    <div id="social-links-editor-container" class="social-links-manager">
+                        <!-- Rendered dynamically via JavaScript -->
+                    </div>
+
+                    <div style="margin-top: 1.5rem;">
+                        <button id="btn-add-social" class="btn btn-add-social">
+                            <span>+</span> Add Social Link
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tab 4: Upload Video -->
+            <section id="tab-upload" class="tab-panel">
+                <div class="panel-header">
+                    <h2>Video Management</h2>
+                    <p>Upload a new MP4 video file to automatically replace the landing page background cinematic.</p>
+                </div>
+
+                <div class="glass-card">
+                    <h3 class="card-title">Upload Video Stream</h3>
+                    <p class="card-description">Drag and drop your custom `.mp4` video here. The file will overwrite `mp_.mp4` on the server and take effect immediately. Keep files under 100MB for optimal loading.</p>
+                    
+                    <!-- File Drag & Drop Zone -->
+                    <div id="drop-zone" class="drop-zone">
+                        <span class="drop-zone-icon">&#8682;</span>
+                        <p class="drop-zone-text">Drag and drop an <strong>MP4 file</strong> here, or click to browse</p>
+                        <input type="file" id="file-input" accept="video/mp4" style="display: none;">
+                    </div>
+
+                    <!-- Progress Details -->
+                    <div id="upload-progress-container" class="upload-progress-container" style="display: none;">
+                        <div class="upload-info">
+                            <span id="upload-filename">video.mp4</span>
+                            <span id="upload-percentage">0%</span>
+                        </div>
+                        <div class="progress-bar-wrapper">
+                            <div id="upload-bar" class="upload-bar"></div>
+                        </div>
+                        <div id="upload-status-text" class="upload-status-text">Uploading file to server...</div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Script -->
+    <script src="admin.js"></script>
+</body>
+</html>

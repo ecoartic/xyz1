@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AETHER // Dimension of Light & Motion</title>
+    <meta name="description" content="Explore Aether - A premium interactive scroll experience powered by fluid motion control.">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://behrang.xyz/">
+    <meta property="og:title" content="AETHER // Dimension of Light & Motion">
+    <meta property="og:description" content="Explore Aether - A premium interactive scroll experience powered by fluid motion control.">
+    <meta property="og:image" content="cover.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://behrang.xyz/">
+    <meta property="twitter:title" content="AETHER // Dimension of Light & Motion">
+    <meta property="twitter:description" content="Explore Aether - A premium interactive scroll experience powered by fluid motion control.">
+    <meta property="twitter:image" content="cover.jpg">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Preloader -->
+    <div id="loader" class="loader-container">
+        <div class="loader-content">
+            <h2 id="loader-title" class="loader-title">A E T H E R</h2>
+            <div class="loader-bar">
+                <div class="loader-progress"></div>
+            </div>
+            <p id="loader-status" class="loader-status">Preloading Cinematic Assets...</p>
+        </div>
+    </div>
+
+    <!-- Background Grid Effect -->
+    <div class="bg-grid"></div>
+    <div class="glow-orb glow-1"></div>
+    <div class="glow-orb glow-2"></div>
+
+    <!-- Navigation Header -->
+    <header class="navbar">
+        <div id="nav-logo" class="logo">AETHER</div>
+        <nav class="nav-links" id="nav-links-container">
+            <!-- Rendered dynamically -->
+        </nav>
+        <div class="nav-action">
+            <a id="nav-action-btn" class="btn btn-secondary" href="#" target="_blank">Launch App</a>
+        </div>
+    </header>
+
+    <!-- Scroll Track Indicator (Right Side) -->
+    <div class="scroll-tracker" id="scroll-tracker-container">
+        <!-- Rendered dynamically -->
+    </div>
+
+    <!-- Sticky Video Wrapper -->
+    <div class="video-container">
+        <div class="video-wrapper">
+            <video id="scroll-video" src="mp_.mp4" muted playsinline preload="auto"></video>
+            <div class="video-overlay"></div>
+        </div>
+    </div>
+
+    <!-- Scrollable Space -->
+    <main class="scroll-sections" id="scroll-sections-container">
+        <!-- Rendered dynamically -->
+    </main>
+
+    <!-- Footer Info -->
+    <footer class="footer">
+        <p>&copy; 2026 AETHER. All rights reserved.</p>
+        <div class="social-links-footer" id="social-links-container">
+            <!-- Rendered dynamically -->
+        </div>
+        <p id="time-display" class="time-stamp">Time Offset: 1.0s – 27.0s</p>
+    </footer>
+
+
+    <!-- JavaScript -->
+    <script type="module" src="app.js"></script>
+</body>
+</html>
