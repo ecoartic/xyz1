@@ -4,7 +4,8 @@
   "description": "Full-stack landing page with scroll-controlled video playback and admin panel.",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "node .github/init.js"
   },
   "dependencies": {
     "express": "^4.19.2",
