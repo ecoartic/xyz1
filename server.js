@@ -6,9 +6,37 @@ const multer = require('multer');
 const app = express();
 const PORT = process.env.PORT || 8082;
 const CONFIG_FILE = path.join(__dirname, 'config.json');
+const CONFIG_DEFAULT_FILE = path.join(__dirname, 'config.default.json');
+const UPLOADS_DIR = path.join(__dirname, 'uploads');
+
+// Ensure uploads directory exists
+try {
+    if (!fs.existsSync(UPLOADS_DIR)) {
+        fs.mkdirSync(UPLOADS_DIR);
+        console.log('Created uploads directory');
+    }
+} catch (e) {
+    console.error('Failed to create uploads directory:', e);
+}
+
+// Ensure config.json exists from template fallback
+try {
+    if (!fs.existsSync(CONFIG_FILE)) {
+        if (fs.existsSync(CONFIG_DEFAULT_FILE)) {
+            fs.copyFileSync(CONFIG_DEFAULT_FILE, CONFIG_FILE);
+            console.log('Created config.json from config.default.json template');
+        } else {
+            console.error('config.default.json template not found!');
+        }
+    }
+} catch (e) {
+    console.error('Failed to initialize config.json:', e);
+}
 
 // Environment configuration
 const ALLOW_UNSAFE_EVAL = process.env.ALLOW_UNSAFE_EVAL === 'true' || false;
+const ADMIN_USER = process.env.ADMIN_USER || 'Admin';
+const ADMIN_PASS = process.env.ADMIN_PASSWORD || process.env.ADMIN_PASS || 'Eco1360724@';
 
 // Express Middleware
 app.use(express.json());
@@ -26,6 +54,25 @@ app.use((req, res, next) => {
     next();
 });
 
+// Simple In-Memory Rate Limiter for Login/Admin Routes
+const loginAttempts = new Map();
+const rateLimiter = (req, res, next) => {
+    const ip = req.ip;
+    const now = Date.now();
+    const attempts = loginAttempts.get(ip) || [];
+    
+    // Filter attempts in the last 15 minutes (900,000 ms)
+    const recentAttempts = attempts.filter(time => now - time < 900000);
+    
+    if (recentAttempts.length >= 60) {
+        return res.status(429).send('Too many requests. Please try again after 15 minutes.');
+    }
+    
+    recentAttempts.push(now);
+    loginAttempts.set(ip, recentAttempts);
+    next();
+};
+
 // Basic Authentication Middleware
 const basicAuth = (req, res, next) => {
     const authHeader = req.headers.authorization;
@@ -38,7 +85,7 @@ const basicAuth = (req, res, next) => {
     const user = auth[0];
     const pass = auth[1];
 
-    if (user === 'Admin' && pass === 'Eco1360724@') {
+    if (user === ADMIN_USER && pass === ADMIN_PASS) {
         return next();
     } else {
         res.setHeader('WWW-Authenticate', 'Basic realm="Admin Panel"');
@@ -46,11 +93,16 @@ const basicAuth = (req, res, next) => {
     }
 };
 
-// Protect admin pages (defined BEFORE express.static to override directory serving)
-app.get('/admin', basicAuth, (req, res) => {
-    res.sendFile(path.join(__dirname, 'admin.html'));
+// Block public access to default admin URL paths
+app.get('/admin', (req, res) => {
+    res.status(404).send('Not Found');
 });
-app.get('/admin.html', basicAuth, (req, res) => {
+app.get('/admin.html', (req, res) => {
+    res.status(404).send('Not Found');
+});
+
+// Protect custom admin panel path (defined BEFORE static to override serving)
+app.get('/studio-control', rateLimiter, basicAuth, (req, res) => {
     res.sendFile(path.join(__dirname, 'admin.html'));
 });
 
@@ -59,7 +111,7 @@ app.use(express.static(__dirname));
 // Multer Storage Configuration for Video Upload
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, __dirname);
+        cb(null, UPLOADS_DIR);
     },
     filename: function (req, file, cb) {
         const pageId = req.query.page || 'default';
@@ -106,7 +158,7 @@ app.get('/api/config', (req, res) => {
 });
 
 // 2. POST config (Save configuration settings)
-app.post('/api/config', basicAuth, (req, res) => {
+app.post('/api/config', rateLimiter, basicAuth, (req, res) => {
     const newConfig = req.body;
     
     if (!newConfig || typeof newConfig !== 'object') {
@@ -122,7 +174,7 @@ app.post('/api/config', basicAuth, (req, res) => {
 });
 
 // 3. POST video upload
-app.post('/api/upload-video', basicAuth, (req, res) => {
+app.post('/api/upload-video', rateLimiter, basicAuth, (req, res) => {
     // Custom upload handler to support progress reporting on clients
     const uploadSingle = upload.single('video');
     
@@ -148,6 +200,6 @@ app.listen(PORT, () => {
     console.log(`=================================================`);
     console.log(`  AETHER Server running on port ${PORT}`);
     console.log(`  Landing Page:    http://localhost:${PORT}/`);
-    console.log(`  Admin Dashboard: http://localhost:${PORT}/admin.html`);
+    console.log(`  Admin Dashboard: http://localhost:${PORT}/studio-control`);
     console.log(`=================================================`);
 });

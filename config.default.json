@@ -7,7 +7,7 @@
         "accentCyan": "#06b6d4"
       },
       "video": {
-        "src": "mp_.mp4",
+        "src": "uploads/mp_.mp4",
         "startTime": 1,
         "endTime": 23,
         "smoothing": 0.02
@@ -95,7 +95,7 @@
         "accentCyan": "#d50775"
       },
       "video": {
-        "src": "video_note.mp4",
+        "src": "uploads/video_note.mp4",
         "startTime": 1,
         "endTime": 23,
         "smoothing": 0.02

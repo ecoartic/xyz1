@@ -172,7 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const template = JSON.parse(JSON.stringify(activeConfig.pages['default']));
         
         // Customize parameters for the new campaign
-        template.video.src = `video_${cleanId}.mp4`;
+        template.video.src = `uploads/video_${cleanId}.mp4`;
         template.loader.title = cleanId.toUpperCase();
         template.navigation.logo = cleanId.toUpperCase();
         template.sections.forEach((s, idx) => {
@@ -608,7 +608,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 accentCyan: colorAccentCyan.value
             },
             video: {
-                src: activeCampaignId === 'default' ? 'mp_.mp4' : `video_${activeCampaignId}.mp4`,
+                src: activeCampaignId === 'default' ? 'uploads/mp_.mp4' : `uploads/video_${activeCampaignId}.mp4`,
                 startTime: parseFloat(videoStart.value) || 1.0,
                 endTime: parseFloat(videoEnd.value) || 27.0,
                 smoothing: parseFloat(videoSmoothing.value) || 0.08
