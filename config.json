@@ -20,7 +20,7 @@
         "logo": "Behrang.XYZ",
         "links": [],
         "actionText": "GO TO NOTE",
-        "actionUrl": "http://localhost:8080/?page=note"
+        "actionUrl": "https://xyz.behrang.xyz/?page=note"
       },
       "socialLinks": [
         {
@@ -108,7 +108,7 @@
         "logo": "NOTE",
         "links": [],
         "actionText": "GO  Back",
-        "actionUrl": "http://localhost:8080/"
+        "actionUrl": "http://xyz.behrang.xyz"
       },
       "socialLinks": [
         {
