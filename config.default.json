@@ -7,9 +7,12 @@
         "accentCyan": "#06b6d4"
       },
       "video": {
-        "src": "mp_.mp4",
+        "src": "uploads/mp_.mp4",
+        "mobileSrc": "uploads/mp_mobile.mp4",
         "startTime": 1,
         "endTime": 23,
+        "mobileStartTime": 0,
+        "mobileEndTime": 15,
         "smoothing": 0.01
       },
       "loader": {
@@ -95,9 +98,12 @@
         "accentCyan": "#d50775"
       },
       "video": {
-        "src": "video_note.mp4",
+        "src": "uploads/video_note.mp4",
+        "mobileSrc": "uploads/video_note_mobile.mp4",
         "startTime": 1,
         "endTime": 10,
+        "mobileStartTime": 0,
+        "mobileEndTime": 15,
         "smoothing": 0.02
       },
       "loader": {
