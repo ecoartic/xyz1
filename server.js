@@ -7,12 +7,22 @@ const app = express();
 const PORT = process.env.PORT || 8082;
 const CONFIG_FILE = path.join(__dirname, 'config.json');
 
+// Environment configuration
+const ALLOW_UNSAFE_EVAL = process.env.ALLOW_UNSAFE_EVAL === 'true' || false;
+
 // Express Middleware
 app.use(express.json());
 
-// Set Headers to disable caching for all static assets (HTML, CSS, JS) during development
+// Set Headers to disable caching and set Content-Security-Policy
 app.use((req, res, next) => {
     res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, private');
+    
+    // Set Content Security Policy for scripts
+    const csp = ALLOW_UNSAFE_EVAL 
+        ? "script-src 'self' 'unsafe-eval'" 
+        : "script-src 'self'";
+    res.setHeader('Content-Security-Policy', csp);
+    
     next();
 });
 
