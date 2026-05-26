@@ -13,7 +13,7 @@
         "endTime": 23,
         "mobileStartTime": 0,
         "mobileEndTime": 15,
-        "smoothing": 0.02
+        "smoothing": 0.01
       },
       "loader": {
         "title": "Behrang",
@@ -101,7 +101,7 @@
         "src": "uploads/video_note.mp4",
         "mobileSrc": "uploads/video_note_mobile.mp4",
         "startTime": 1,
-        "endTime": 23,
+        "endTime": 10,
         "mobileStartTime": 0,
         "mobileEndTime": 15,
         "smoothing": 0.02
