@@ -10,7 +10,7 @@
         "src": "mp_.mp4",
         "startTime": 1,
         "endTime": 23,
-        "smoothing": 0.02
+        "smoothing": 0.01
       },
       "loader": {
         "title": "Behrang",
@@ -97,7 +97,7 @@
       "video": {
         "src": "video_note.mp4",
         "startTime": 1,
-        "endTime": 23,
+        "endTime": 10,
         "smoothing": 0.02
       },
       "loader": {
