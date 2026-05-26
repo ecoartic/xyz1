@@ -8,8 +8,11 @@
       },
       "video": {
         "src": "uploads/mp_.mp4",
+        "mobileSrc": "uploads/mp_mobile.mp4",
         "startTime": 1,
         "endTime": 23,
+        "mobileStartTime": 0,
+        "mobileEndTime": 15,
         "smoothing": 0.02
       },
       "loader": {
@@ -96,8 +99,11 @@
       },
       "video": {
         "src": "uploads/video_note.mp4",
+        "mobileSrc": "uploads/video_note_mobile.mp4",
         "startTime": 1,
         "endTime": 23,
+        "mobileStartTime": 0,
+        "mobileEndTime": 15,
         "smoothing": 0.02
       },
       "loader": {

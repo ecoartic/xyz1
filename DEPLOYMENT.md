@@ -58,7 +58,9 @@ git push origin main
 > cd /root/xyz1
 > mkdir -p uploads
 > cp mp_.mp4 uploads/mp_.mp4
+> cp mp_mobile.mp4 uploads/mp_mobile.mp4 2>/dev/null || true
 > cp video_note.mp4 uploads/video_note.mp4
+> cp video_note_mobile.mp4 uploads/video_note_mobile.mp4 2>/dev/null || true
 > cp config.json config.production.backup.json
 > ```
 
