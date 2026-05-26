@@ -115,12 +115,13 @@ const storage = multer.diskStorage({
     },
     filename: function (req, file, cb) {
         const pageId = req.query.page || 'default';
+        const isMobile = req.query.type === 'mobile';
+        
         if (pageId === 'default') {
-            cb(null, 'mp_.mp4');
+            cb(null, isMobile ? 'mp_mobile.mp4' : 'mp_.mp4');
         } else {
-            // Clean pageId to prevent directory traversal
             const cleanPageId = pageId.replace(/[^a-zA-Z0-9_-]/g, '');
-            cb(null, `video_${cleanPageId}.mp4`);
+            cb(null, isMobile ? `video_${cleanPageId}_mobile.mp4` : `video_${cleanPageId}.mp4`);
         }
     }
 });

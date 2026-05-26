@@ -228,6 +228,11 @@ document.addEventListener('DOMContentLoaded', () => {
         // Video Settings
         videoStart.value = config.video.startTime;
         videoEnd.value = config.video.endTime;
+        
+        // Mobile video settings fallback
+        document.getElementById('video-start-mobile').value = config.video.mobileStartTime !== undefined ? config.video.mobileStartTime : 0.0;
+        document.getElementById('video-end-mobile').value = config.video.mobileEndTime !== undefined ? config.video.mobileEndTime : 15.0;
+        
         videoSmoothing.value = config.video.smoothing;
         smoothingVal.textContent = config.video.smoothing;
 
@@ -609,8 +614,11 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             video: {
                 src: activeCampaignId === 'default' ? 'uploads/mp_.mp4' : `uploads/video_${activeCampaignId}.mp4`,
+                mobileSrc: activeCampaignId === 'default' ? 'uploads/mp_mobile.mp4' : `uploads/video_${activeCampaignId}_mobile.mp4`,
                 startTime: parseFloat(videoStart.value) || 1.0,
                 endTime: parseFloat(videoEnd.value) || 27.0,
+                mobileStartTime: isNaN(parseFloat(document.getElementById('video-start-mobile').value)) ? 0.0 : parseFloat(document.getElementById('video-start-mobile').value),
+                mobileEndTime: isNaN(parseFloat(document.getElementById('video-end-mobile').value)) ? 15.0 : parseFloat(document.getElementById('video-end-mobile').value),
                 smoothing: parseFloat(videoSmoothing.value) || 0.08
             },
             loader: {
@@ -772,9 +780,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const formData = new FormData();
         formData.append('video', file);
 
+        // Get selected upload type (desktop or mobile)
+        const typeEl = document.querySelector('input[name="upload-video-type"]:checked');
+        const uploadType = typeEl ? typeEl.value : 'desktop';
+
         const xhr = new XMLHttpRequest();
-        // Append activeCampaignId to let the server save it as video_[campaignId].mp4
-        xhr.open('POST', `/api/upload-video?page=${activeCampaignId}`, true);
+        // Append activeCampaignId and type to let the server save it as the correct file
+        xhr.open('POST', `/api/upload-video?page=${activeCampaignId}&type=${uploadType}`, true);
 
         xhr.upload.addEventListener('progress', (e) => {
             if (e.lengthComputable) {

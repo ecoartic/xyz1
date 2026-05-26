@@ -139,17 +139,47 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // B. Video Timing & Parameters
         if (pageConfig.video) {
-            const videoSrc = pageConfig.video.src || 'mp_.mp4';
+            // Mobile detection: Width <= 768px or Portrait orientation
+            const isPortrait = window.matchMedia("(orientation: portrait)").matches;
+            const isSmallScreen = window.innerWidth <= 768;
+            const useMobileVideo = (isSmallScreen || isPortrait) && pageConfig.video.mobileSrc;
+
+            // Pick the appropriate video source
+            const videoSrc = useMobileVideo ? pageConfig.video.mobileSrc : (pageConfig.video.src || 'mp_.mp4');
+            
             // Append timestamp to break Chrome cache and load fresh stream
             video.src = videoSrc + "?t=" + Date.now();
 
-            startVideoTime = parseFloat(pageConfig.video.startTime) || 1.0;
-            endVideoTime = parseFloat(pageConfig.video.endTime) || 27.0;
+            // Set start, end, and smoothing variables
+            if (useMobileVideo) {
+                const rawMobileStart = pageConfig.video.mobileStartTime !== undefined ? pageConfig.video.mobileStartTime : pageConfig.video.startTime;
+                startVideoTime = isNaN(parseFloat(rawMobileStart)) ? 1.0 : parseFloat(rawMobileStart);
+                const rawMobileEnd = pageConfig.video.mobileEndTime !== undefined ? pageConfig.video.mobileEndTime : pageConfig.video.endTime;
+                endVideoTime = isNaN(parseFloat(rawMobileEnd)) ? 27.0 : parseFloat(rawMobileEnd);
+            } else {
+                startVideoTime = isNaN(parseFloat(pageConfig.video.startTime)) ? 1.0 : parseFloat(pageConfig.video.startTime);
+                endVideoTime = isNaN(parseFloat(pageConfig.video.endTime)) ? 27.0 : parseFloat(pageConfig.video.endTime);
+            }
+            
             scrollSmoothing = parseFloat(pageConfig.video.smoothing) || 0.08;
             
             // Adjust start point
             targetTime = startVideoTime;
             currentTime = startVideoTime;
+
+            // Fallback to desktop video if mobile video fails to load
+            if (useMobileVideo) {
+                const handleVideoError = () => {
+                    console.warn("Mobile video failed to load, falling back to desktop video.");
+                    video.src = (pageConfig.video.src || 'mp_.mp4') + "?t=" + Date.now();
+                    startVideoTime = isNaN(parseFloat(pageConfig.video.startTime)) ? 1.0 : parseFloat(pageConfig.video.startTime);
+                    endVideoTime = isNaN(parseFloat(pageConfig.video.endTime)) ? 27.0 : parseFloat(pageConfig.video.endTime);
+                    targetTime = startVideoTime;
+                    currentTime = startVideoTime;
+                    video.load();
+                };
+                video.addEventListener('error', handleVideoError, { once: true });
+            }
         }
 
         // C. Preloader Text
